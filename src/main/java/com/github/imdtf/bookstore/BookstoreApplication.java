@@ -2,7 +2,6 @@ package com.github.imdtf.bookstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
@@ -12,7 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  * 3 * @Date: 2022/4/12 22:36
  * 4
  */
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
 @EnableCaching
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class BookstoreApplication {
