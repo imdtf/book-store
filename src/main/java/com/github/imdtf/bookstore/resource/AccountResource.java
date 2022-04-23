@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * 4
  */
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/restful/accounts")
 @CacheConfig(cacheNames = "resource.account")
 @RequiredArgsConstructor
 public class AccountResource {
@@ -29,13 +29,13 @@ public class AccountResource {
 
     @PostMapping
     @CacheEvict(key = "#user.username")
-    public Object createUser(Account user) {
+    public Object createUser(@RequestBody Account user) {
         return CommonResponse.op(() -> service.createAccount(user));
     }
 
     @PutMapping
     @CacheEvict(key = "#user.username")
-    public Object updateUser(Account user) {
+    public Object updateUser(@RequestBody Account user) {
         return CommonResponse.op(() -> service.updateAccount(user));
     }
 }

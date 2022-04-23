@@ -56,8 +56,8 @@ public class ProductResource {
             @CacheEvict(key = "'ALL_PRODUCT'")
     })
     @RolesAllowed(Role.ADMIN)
-    public Object createProduct(@Valid Product product) {
-        return CommonResponse.op(() -> service.saveProduct(product));
+    public Object createProduct(@Valid @RequestBody Product product) {
+        return service.saveProduct(product);
     }
 
     @DeleteMapping("/{id}")
