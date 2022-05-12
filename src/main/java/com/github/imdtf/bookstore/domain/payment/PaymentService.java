@@ -72,4 +72,37 @@ public class PaymentService {
             }
         });
     }
+
+    /**
+     * 完成支付单，应该有第三方支付平台回调
+     * @param payId 支付Id
+     * @return 价格
+     */
+    public double accomplish(String payId) {
+        synchronized (payId.intern()) {
+            Payment payment = paymentRepository.findByPayId(payId);
+            if (payment.getPayState() == Payment.State.WATTING) {
+                payment.setPayState(Payment.State.PAYED);
+                paymentRepository.save(payment);
+                accomplishSettlement(Payment.State.PAYED, payId);
+                log.info("编号为 {} 的支付单处理完成", payId);
+                return payment.getTotalPrice();
+            } else {
+                throw new UnsupportedOperationException("当前订单不允许支付，当前状态为: " + payment.getPayState());
+            }
+        }
+    }
+    public void cancel(String payId) {
+        synchronized (payId.intern()) {
+            Payment payment = paymentRepository.findByPayId(payId);
+            if (payment.getPayState() == Payment.State.WATTING) {
+                payment.setPayState(Payment.State.CANCEL);
+                paymentRepository.save(payment);
+                accomplishSettlement(Payment.State.CANCEL, payId);
+                log.info("编号为 {} 的支付取消支付", payId);
+            } else {
+                throw new UnsupportedOperationException("当前订单不允许取消，当前状态为: " + payment.getPayState());
+            }
+        }
+    }
 }

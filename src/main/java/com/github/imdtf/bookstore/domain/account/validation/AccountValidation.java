@@ -4,7 +4,7 @@ import com.github.imdtf.bookstore.domain.account.Account;
 import com.github.imdtf.bookstore.domain.account.AccountRepository;
 import com.github.imdtf.bookstore.domain.auth.AuthenticAccount;
 import com.github.imdtf.bookstore.infrastructure.Constant;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.validation.ConstraintValidator;
@@ -19,10 +19,10 @@ import java.util.function.Predicate;
  * 3 * @Date: 2022/4/12 23:13
  * 4
  */
-@RequiredArgsConstructor
 public class AccountValidation<T extends Annotation> implements ConstraintValidator<T, Account> {
 
-    protected final AccountRepository repository;
+    @Autowired
+    protected AccountRepository repository;
 
     protected Predicate<Account> predicate = c -> true;
 
@@ -33,11 +33,6 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
 
     public static class ExistsAccountValidator extends AccountValidation<ExistsAccount> {
 
-        // TODO spring bean ???
-        public ExistsAccountValidator(AccountRepository repository) {
-            super(repository);
-        }
-
         @Override
         public void initialize(ExistsAccount constraintAnnotation) {
             predicate = c -> repository.existsById(c.getId());
@@ -45,11 +40,6 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
     }
 
     public static class AuthenticatedAccountValidator extends AccountValidation<AuthenticatedAccount> {
-
-        // TODO spring bean ???
-        public AuthenticatedAccountValidator(AccountRepository repository) {
-            super(repository);
-        }
 
         @Override
         public void initialize(AuthenticatedAccount constraintAnnotation) {
@@ -67,11 +57,6 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
 
     public static class UniqueAccountValidator extends AccountValidation<UniqueAccount> {
 
-        // TODO spring bean ???
-        public UniqueAccountValidator(AccountRepository repository) {
-            super(repository);
-        }
-
         @Override
         public void initialize(UniqueAccount constraintAnnotation) {
             predicate = c -> !repository.existsByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());
@@ -79,11 +64,6 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
     }
 
     public static class NoConflictAccountValidator extends AccountValidation<NotConflictAccount> {
-
-        // TODO spring bean ???
-        public NoConflictAccountValidator(AccountRepository repository) {
-            super(repository);
-        }
 
         @Override
         public void initialize(NotConflictAccount notConflictAccount) {

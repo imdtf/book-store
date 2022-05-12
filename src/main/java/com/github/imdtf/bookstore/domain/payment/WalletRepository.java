@@ -2,6 +2,8 @@ package com.github.imdtf.bookstore.domain.payment;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 /**
  * 1 * @Author: deng.tengfei
  * 2 * @email: imdtf@qq.com
@@ -9,4 +11,12 @@ import org.springframework.data.repository.CrudRepository;
  * 4
  */
 public interface WalletRepository extends CrudRepository<Wallet, Integer> {
+
+    /**
+     * 根据用户 id 查询钱包
+     *
+     * @param accountId 用户 id
+     * @return 结果
+     */
+    Optional<Wallet> findByAccountId(Integer accountId);
 }

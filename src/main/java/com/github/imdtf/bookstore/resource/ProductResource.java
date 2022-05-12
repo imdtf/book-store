@@ -73,16 +73,12 @@ public class ProductResource {
     @PatchMapping("/stockpile/{productId}")
     @RolesAllowed(Role.ADMIN)
     public Object updateStockpile(@PathVariable Integer productId, @RequestParam("amount") Integer amount) {
-        // TODO
-        // return CommonResponse.op(() -> service)
-        return "todo";
+        return CommonResponse.op(() -> service.setStockpileAmountByProductId(productId, amount));
     }
 
     @GetMapping("/stockpile/{productId}")
     @RolesAllowed(Role.ADMIN)
     public Object queryStockpile(@PathVariable Integer productId) {
-        // TODO
-        // return CommonResponse.op(() -> service)
-        return "todo";
+        return service.getStockpile(productId);
     }
 }

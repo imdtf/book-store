@@ -1,5 +1,7 @@
 package com.github.imdtf.bookstore.application;
 
+import com.github.imdtf.bookstore.domain.payment.Stockpile;
+import com.github.imdtf.bookstore.domain.payment.StockpileService;
 import com.github.imdtf.bookstore.domain.warehouse.Product;
 import com.github.imdtf.bookstore.domain.warehouse.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,7 @@ public class ProductApplicationService {
 
     private final ProductService service;
 
-    // TODO
-    // private final StockpileService stockpileService;
+    private final StockpileService stockpileService;
 
     public Iterable<Product> getAllProducts() {
         return service.getAllProducts();
@@ -39,5 +40,11 @@ public class ProductApplicationService {
         service.removeProduct(id);
     }
 
-    // TODO stockpile
+    public Stockpile getStockpile(Integer productId) {
+        return stockpileService.getByProductId(productId);
+    }
+
+    public void setStockpileAmountByProductId(Integer productId, Integer amount) {
+        stockpileService.set(productId, amount);
+    }
 }

@@ -6,7 +6,10 @@ import com.github.imdtf.bookstore.domain.payment.PaymentService;
 import com.github.imdtf.bookstore.domain.payment.WalletService;
 import com.github.imdtf.bookstore.domain.warehouse.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 1 * @Author: deng.tengfei
@@ -24,10 +27,27 @@ public class PaymentApplicationService {
 
     private final WalletService walletService;
 
+    @Resource(name = "settlement")
+    private Cache settlementCache;
+
     public Payment executeBySettlement(Settlement bill) {
         productService.replenishProductInformation(bill);
         Payment payment = paymentService.producePayment(bill);
         paymentService.setupAutoThawedTrigger(payment);
         return payment;
+    }
+
+    public void accomplishPayment(Integer accountId, String payId) {
+        double price = paymentService.accomplish(payId);
+
+        walletService.decrease(accountId, price);
+
+        settlementCache.evict(payId);
+    }
+
+    public void cancelPayment(String payId) {
+        paymentService.cancel(payId);
+
+        settlementCache.evict(payId);
     }
 }
