@@ -8,7 +8,7 @@ package com.github.imdtf.bookstore.domain.auth;
  */
 public interface Role {
 
-    String USER = "user";
+    String USER = "ROLE_USER";
 
-    String ADMIN = "admin";
+    String ADMIN = "ROLE_ADMIN";
 }

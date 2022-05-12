@@ -2,11 +2,14 @@ package com.github.imdtf.bookstore.resource;
 
 import com.github.imdtf.bookstore.application.payment.PaymentApplicationService;
 import com.github.imdtf.bookstore.domain.account.Account;
+import com.github.imdtf.bookstore.domain.auth.Role;
 import com.github.imdtf.bookstore.domain.payment.Payment;
 import com.github.imdtf.bookstore.infrastructure.jaxrs.CommonResponse;
 import com.github.imdtf.bookstore.infrastructure.utility.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 
 /**
  * 0 *
@@ -24,9 +27,8 @@ public class PaymentResource {
     private final PaymentApplicationService service;
 
     @PatchMapping("/{payId}")
-    // @RolesAllowed(Role.USER)
+    @RolesAllowed(Role.USER)
     public Object updatePaymentState(@PathVariable("payId") String payId, @RequestParam("state") Payment.State state) {
-        // TODO deal permission
         Account account = SecurityUtil.getUser();
         return updatePaymentStateAlias(payId, account.getId(), state);
     }
