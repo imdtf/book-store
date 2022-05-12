@@ -1,5 +1,6 @@
 package com.github.imdtf.bookstore.domain.auth.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +12,6 @@ import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticat
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
 
     private static final String JWT_TOKEN_STRING_PRIVATE_KEY = "601304E0-8AD4-40B0-BD51-0B432DC47461";
 
-    @Inject
+    @Autowired
     public JwtAccessToken(UserDetailsService userDetailsService) {
         setSigningKey(JWT_TOKEN_STRING_PRIVATE_KEY);
         DefaultUserAuthenticationConverter converter = new DefaultUserAuthenticationConverter();

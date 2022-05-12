@@ -1,11 +1,10 @@
 package com.github.imdtf.bookstore.domain.auth.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.stereotype.Service;
-
-import javax.inject.Inject;
 
 /**
  * 1 * @Author: deng.tengfei
@@ -16,7 +15,7 @@ import javax.inject.Inject;
 @Service
 public class JwtAccessTokenService extends DefaultTokenServices {
 
-    @Inject
+    @Autowired
     public JwtAccessTokenService(JwtAccessToken token, AuthClientDetailsServiceImpl clientDetailsService, AuthenticationManager authenticationManager) {
         setTokenStore(new JwtTokenStore(token));
 
