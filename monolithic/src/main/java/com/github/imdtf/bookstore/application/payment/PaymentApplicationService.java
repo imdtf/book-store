@@ -38,9 +38,12 @@ public class PaymentApplicationService {
     }
 
     public void accomplishPayment(Integer accountId, String payId) {
-        double price = paymentService.accomplish(payId);
 
-        walletService.decrease(accountId, price);
+        Payment payment = paymentService.findByPayId(payId);
+
+        walletService.decrease(accountId, payment.getTotalPrice());
+
+        paymentService.accomplish(payment);
 
         settlementCache.evict(payId);
     }

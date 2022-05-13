@@ -14,9 +14,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @SpringBootApplication
 @EnableCaching
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
-public class BookstoreApplication {
+public class MonolithicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BookstoreApplication.class, args);
+        SpringApplication.run(MonolithicApplication.class, args);
     }
 }
