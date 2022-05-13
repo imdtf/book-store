@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS account
     email     VARCHAR(100),
     location  VARCHAR(100),
     INDEX (username)
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS wallet
 (
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS wallet
     money      DECIMAL,
     account_id INTEGER UNSIGNED,
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS product
 (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS product
     cover       VARCHAR(100),
     detail      VARCHAR(100),
     INDEX (title)
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS stockpile
 (
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS stockpile
     frozen     INTEGER,
     product_id INTEGER UNSIGNED,
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS specification
 (
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS specification
     value      VARCHAR(100),
     product_id INTEGER UNSIGNED,
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS advertisement
 (
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS advertisement
     image      VARCHAR(100),
     product_id INTEGER UNSIGNED,
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;
 
 CREATE TABLE IF NOT EXISTS payment
 (
@@ -74,4 +74,4 @@ CREATE TABLE IF NOT EXISTS payment
     expires      INTEGER          NOT NULL,
     payment_link VARCHAR(300),
     pay_state    VARCHAR(20)
-) engine = InnoDB;
+) engine = InnoDB, character set = utf8;

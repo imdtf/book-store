@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS bookstore;
+CREATE DATABASE IF NOT EXISTS book_store;
 
-ALTER DATABASE bookstore
+ALTER DATABASE book_store
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
-GRANT ALL PRIVILEGES ON bookstore.* TO 'bookstore@%' IDENTIFIED BY 'bookstore';
+GRANT ALL PRIVILEGES ON book_store.* TO 'bookstore@%' IDENTIFIED BY 'bookstore';

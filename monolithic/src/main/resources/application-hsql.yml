@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    schema: "classpath:db/hsqldb/schema.sql"
+    data: "classpath:db/hsqldb/data.sql"
+    sql-script-encoding: UTF-8
