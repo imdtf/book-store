@@ -1,4 +1,4 @@
-package com.github.imdtf.bookstore.infrastructure.cache;
+package com.github.imdtf.bookstore.infrastructure.configuration;
 
 import com.github.imdtf.bookstore.domain.auth.service.JwtAccessTokenService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +33,5 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.tokenServices(tokenService);
-
     }
 }

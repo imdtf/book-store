@@ -13,6 +13,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>platform-configuration</module>
+        <module>platform-registry</module>
+        <module>platform-gateway</module>
+        <module>library-infrastructure</module>
+        <module>domain-account</module>
+        <module>domain-warehouse</module>
+        <module>domain-payment</module>
+        <module>domain-security</module>
     </modules>
 
     <properties>
